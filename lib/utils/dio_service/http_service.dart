@@ -32,21 +32,15 @@ class HttpService {
     T Function(List? data)? fromResponseList,
     T Function(dynamic value)? fromResponseValue,
   }) async {
-    try {
       T onMap(Response<dynamic> response) {
         if (fromResponseMap != null || fromResponseList != null || fromResponseValue != null) {
-          return ResponseModel.fromJson(
-            response.data,
-            (data) {
-              if (data is Map<String, dynamic>) {
-                return fromResponseMap!(data);
-              }
-              if (data is List) {
-                return fromResponseList!(data);
-              }
-              return fromResponseValue!(data);
-            },
-          ).data;
+          if (response.data is Map<String, dynamic>) {
+            return fromResponseMap!(response.data);
+          }
+          if (response.data is List) {
+            return fromResponseList!(response.data);
+          }
+          return fromResponseValue!(response.data);
         }
         return response.data;
       }
@@ -58,22 +52,11 @@ class HttpService {
         options: _checkOptions(request.getDioMethod.name, request.options),
       );
       return right(onMap(response));
-    } on DioException catch (e) {
-      return Left(_fromDioError(e));
-    } catch (_) {
-      return Left(
-        ApiException(
-          statusCode: null,
-          message: "Terjadi kesalahan pada aplikasi, silakan coba lagi nanti.",
-        ),
-      );
-    }
   }
 
   Options _checkOptions(String method, Options? options) {
     options ??= Options();
     options.method = method;
-    print("Datanya oy ${options.method}");
     return options;
   }
 

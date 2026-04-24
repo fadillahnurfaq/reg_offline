@@ -1,16 +1,12 @@
 import 'package:register_offline/utils/dio_service/dio_service_request.dart';
 
-class RegisterParameter with DioServiceRequest {
+class LoginParameter with DioServiceRequest {
   final String email;
   final String password;
-  final String fullName;
-  final String phone;
 
-  RegisterParameter({
+  LoginParameter({
     this.email = "",
     this.password = "",
-    this.fullName = "",
-    this.phone = "",
   });
 
   @override
@@ -18,8 +14,6 @@ class RegisterParameter with DioServiceRequest {
     return {
       "email": email,
       "password": password,
-      "full_name": fullName,
-      "phone": phone,
     };
   }
   
@@ -27,5 +21,5 @@ class RegisterParameter with DioServiceRequest {
   DioMethod get dioMethod => DioMethod.POST;
   
   @override
-  String get path => "/register";
+  String get path => "/login";
 }

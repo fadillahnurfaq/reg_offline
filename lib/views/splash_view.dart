@@ -3,6 +3,9 @@ import 'package:register_offline/utils/colors.dart';
 import 'package:register_offline/utils/extension/build_context_extension.dart';
 import 'package:register_offline/utils/text_style.dart';
 import 'package:register_offline/views/auth/login_view.dart';
+import 'package:register_offline/views/dashboard/dashboard_view.dart';
+
+import '../utils/secure_storage_manager.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
@@ -16,9 +19,17 @@ class _SplashViewState extends State<SplashView> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 1), () {
+    _checkToken();
+  }
+
+  void _checkToken() async {
+    final hasToken = await SecureStorageManager.instance.hasToken();
+    Future.delayed(const Duration(milliseconds: 500));
+    if (hasToken) {
+      context.pushReplacement(const DashboardView());
+    } else {
       context.pushReplacement(const LoginView());
-    });
+    }
   }
 
   @override

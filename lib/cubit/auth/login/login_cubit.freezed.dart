@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$LoginState {
 
- ValidatorResult get emailValidation; ValidatorResult get passwordValidation;
+ ValidatorResult get emailValidation; ValidatorResult get passwordValidation; bool get isLoading; String? get errorMessage; bool? get isSuccess;
 /// Create a copy of LoginState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $LoginStateCopyWith<LoginState> get copyWith => _$LoginStateCopyWithImpl<LoginSt
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoginState&&(identical(other.emailValidation, emailValidation) || other.emailValidation == emailValidation)&&(identical(other.passwordValidation, passwordValidation) || other.passwordValidation == passwordValidation));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoginState&&(identical(other.emailValidation, emailValidation) || other.emailValidation == emailValidation)&&(identical(other.passwordValidation, passwordValidation) || other.passwordValidation == passwordValidation)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.isSuccess, isSuccess) || other.isSuccess == isSuccess));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,emailValidation,passwordValidation);
+int get hashCode => Object.hash(runtimeType,emailValidation,passwordValidation,isLoading,errorMessage,isSuccess);
 
 @override
 String toString() {
-  return 'LoginState(emailValidation: $emailValidation, passwordValidation: $passwordValidation)';
+  return 'LoginState(emailValidation: $emailValidation, passwordValidation: $passwordValidation, isLoading: $isLoading, errorMessage: $errorMessage, isSuccess: $isSuccess)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $LoginStateCopyWith<$Res>  {
   factory $LoginStateCopyWith(LoginState value, $Res Function(LoginState) _then) = _$LoginStateCopyWithImpl;
 @useResult
 $Res call({
- ValidatorResult emailValidation, ValidatorResult passwordValidation
+ ValidatorResult emailValidation, ValidatorResult passwordValidation, bool isLoading, String? errorMessage, bool? isSuccess
 });
 
 
@@ -62,11 +62,14 @@ class _$LoginStateCopyWithImpl<$Res>
 
 /// Create a copy of LoginState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? emailValidation = null,Object? passwordValidation = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? emailValidation = null,Object? passwordValidation = null,Object? isLoading = null,Object? errorMessage = freezed,Object? isSuccess = freezed,}) {
   return _then(_self.copyWith(
 emailValidation: null == emailValidation ? _self.emailValidation : emailValidation // ignore: cast_nullable_to_non_nullable
 as ValidatorResult,passwordValidation: null == passwordValidation ? _self.passwordValidation : passwordValidation // ignore: cast_nullable_to_non_nullable
-as ValidatorResult,
+as ValidatorResult,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
+as bool,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
+as String?,isSuccess: freezed == isSuccess ? _self.isSuccess : isSuccess // ignore: cast_nullable_to_non_nullable
+as bool?,
   ));
 }
 
@@ -151,10 +154,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( ValidatorResult emailValidation,  ValidatorResult passwordValidation)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( ValidatorResult emailValidation,  ValidatorResult passwordValidation,  bool isLoading,  String? errorMessage,  bool? isSuccess)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _LoginState() when $default != null:
-return $default(_that.emailValidation,_that.passwordValidation);case _:
+return $default(_that.emailValidation,_that.passwordValidation,_that.isLoading,_that.errorMessage,_that.isSuccess);case _:
   return orElse();
 
 }
@@ -172,10 +175,10 @@ return $default(_that.emailValidation,_that.passwordValidation);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( ValidatorResult emailValidation,  ValidatorResult passwordValidation)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( ValidatorResult emailValidation,  ValidatorResult passwordValidation,  bool isLoading,  String? errorMessage,  bool? isSuccess)  $default,) {final _that = this;
 switch (_that) {
 case _LoginState():
-return $default(_that.emailValidation,_that.passwordValidation);case _:
+return $default(_that.emailValidation,_that.passwordValidation,_that.isLoading,_that.errorMessage,_that.isSuccess);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -192,10 +195,10 @@ return $default(_that.emailValidation,_that.passwordValidation);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( ValidatorResult emailValidation,  ValidatorResult passwordValidation)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( ValidatorResult emailValidation,  ValidatorResult passwordValidation,  bool isLoading,  String? errorMessage,  bool? isSuccess)?  $default,) {final _that = this;
 switch (_that) {
 case _LoginState() when $default != null:
-return $default(_that.emailValidation,_that.passwordValidation);case _:
+return $default(_that.emailValidation,_that.passwordValidation,_that.isLoading,_that.errorMessage,_that.isSuccess);case _:
   return null;
 
 }
@@ -207,11 +210,14 @@ return $default(_that.emailValidation,_that.passwordValidation);case _:
 
 
 class _LoginState implements LoginState {
-  const _LoginState({required this.emailValidation, required this.passwordValidation});
+  const _LoginState({required this.emailValidation, required this.passwordValidation, required this.isLoading, required this.errorMessage, required this.isSuccess});
   
 
 @override final  ValidatorResult emailValidation;
 @override final  ValidatorResult passwordValidation;
+@override final  bool isLoading;
+@override final  String? errorMessage;
+@override final  bool? isSuccess;
 
 /// Create a copy of LoginState
 /// with the given fields replaced by the non-null parameter values.
@@ -223,16 +229,16 @@ _$LoginStateCopyWith<_LoginState> get copyWith => __$LoginStateCopyWithImpl<_Log
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LoginState&&(identical(other.emailValidation, emailValidation) || other.emailValidation == emailValidation)&&(identical(other.passwordValidation, passwordValidation) || other.passwordValidation == passwordValidation));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LoginState&&(identical(other.emailValidation, emailValidation) || other.emailValidation == emailValidation)&&(identical(other.passwordValidation, passwordValidation) || other.passwordValidation == passwordValidation)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.isSuccess, isSuccess) || other.isSuccess == isSuccess));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,emailValidation,passwordValidation);
+int get hashCode => Object.hash(runtimeType,emailValidation,passwordValidation,isLoading,errorMessage,isSuccess);
 
 @override
 String toString() {
-  return 'LoginState(emailValidation: $emailValidation, passwordValidation: $passwordValidation)';
+  return 'LoginState(emailValidation: $emailValidation, passwordValidation: $passwordValidation, isLoading: $isLoading, errorMessage: $errorMessage, isSuccess: $isSuccess)';
 }
 
 
@@ -243,7 +249,7 @@ abstract mixin class _$LoginStateCopyWith<$Res> implements $LoginStateCopyWith<$
   factory _$LoginStateCopyWith(_LoginState value, $Res Function(_LoginState) _then) = __$LoginStateCopyWithImpl;
 @override @useResult
 $Res call({
- ValidatorResult emailValidation, ValidatorResult passwordValidation
+ ValidatorResult emailValidation, ValidatorResult passwordValidation, bool isLoading, String? errorMessage, bool? isSuccess
 });
 
 
@@ -260,11 +266,14 @@ class __$LoginStateCopyWithImpl<$Res>
 
 /// Create a copy of LoginState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? emailValidation = null,Object? passwordValidation = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? emailValidation = null,Object? passwordValidation = null,Object? isLoading = null,Object? errorMessage = freezed,Object? isSuccess = freezed,}) {
   return _then(_LoginState(
 emailValidation: null == emailValidation ? _self.emailValidation : emailValidation // ignore: cast_nullable_to_non_nullable
 as ValidatorResult,passwordValidation: null == passwordValidation ? _self.passwordValidation : passwordValidation // ignore: cast_nullable_to_non_nullable
-as ValidatorResult,
+as ValidatorResult,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
+as bool,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
+as String?,isSuccess: freezed == isSuccess ? _self.isSuccess : isSuccess // ignore: cast_nullable_to_non_nullable
+as bool?,
   ));
 }
 
