@@ -3,14 +3,14 @@ import 'package:register_offline/cubit/auth/login/login_cubit.dart';
 import 'package:register_offline/utils/colors.dart';
 import 'package:register_offline/utils/extension/build_context_extension.dart';
 import 'package:register_offline/utils/text_style.dart';
-import 'package:register_offline/views/auth/login_view.dart';
+import 'package:register_offline/views/auth/register_view.dart';
 import 'package:register_offline/widgets/button.dart';
 import 'package:register_offline/widgets/form.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:register_offline/widgets/tap_opacity.dart';
 
-class RegisterView extends StatelessWidget {
-  const RegisterView({super.key});
+class LoginView extends StatelessWidget {
+  const LoginView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -41,12 +41,12 @@ class RegisterView extends StatelessWidget {
                         ),
                         const SizedBox(height: 30.0),
                         Text(
-                          "Buat Akun Varifikator",
+                          "Masuk ke Akun Varifikator",
                           style: headlineMediumBold,
                         ),
                         const SizedBox(height: 8.0),
                         Text(
-                          "Lengkapi data untuk membuat akun",
+                          "Masukkan email dan password untuk masuk",
                           style: bodyRegular,
                         ),
                         const SizedBox(height: 16.0),
@@ -92,7 +92,7 @@ class RegisterView extends StatelessWidget {
                         Center(
                           child: RichText(
                             text: TextSpan(
-                              text: "Sudah punya akun?",
+                              text: "Belum punya akun?",
                               style: bodyBold,
                               children: [
                                 const WidgetSpan(
@@ -101,7 +101,7 @@ class RegisterView extends StatelessWidget {
                                 WidgetSpan(
                                   alignment: PlaceholderAlignment.middle,
                                   child: TapOpacity(
-                                    onTap: () => context.pushReplacement(const LoginView()),
+                                    onTap: () => context.pushReplacement(const RegisterView()),
                                     child: Text(
                                       "Klik Bantuan",
                                       style: bodyRegular.copyWith(

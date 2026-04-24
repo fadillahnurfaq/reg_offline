@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:register_offline/utils/colors.dart';
 import 'package:register_offline/utils/extension/build_context_extension.dart';
 import 'package:register_offline/utils/text_style.dart';
-import 'package:register_offline/views/auth/register_view.dart';
+import 'package:register_offline/views/auth/login_view.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
@@ -17,7 +17,7 @@ class _SplashViewState extends State<SplashView> {
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 1), () {
-      context.pushReplacement(const RegisterView());
+      context.pushReplacement(const LoginView());
     });
   }
 
@@ -30,7 +30,7 @@ class _SplashViewState extends State<SplashView> {
           mainAxisAlignment: MainAxisAlignment.center,
           spacing: 6.0,
           children: [
-            Icon(
+            const Icon(
               Icons.document_scanner,
               size: 60.0,
               color: Colors.white,

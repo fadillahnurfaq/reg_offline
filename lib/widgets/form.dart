@@ -4,22 +4,29 @@ import 'package:register_offline/utils/text_style.dart';
 
 class AppForm extends StatefulWidget {
   final String title;
+  final bool isRequired;
   final TextEditingController? controller;
   final Widget? prefixIcon, suffixIcon;
   final bool isError, isPassword;
-  final String? hintText;
+  final String? hintText, forceErrorText;
   final FocusNode? focusNode;
+  final void Function(String value)? onChanged;
+  final TextInputType? keyboardType;
 
   const AppForm({
     super.key,
     required this.title,
+    this.isRequired = false,
     this.controller,
     this.prefixIcon,
     this.suffixIcon,
     this.isError = false,
     this.isPassword = false,
     this.hintText,
+    this.forceErrorText,
     this.focusNode,
+    this.onChanged,
+    this.keyboardType,
   });
 
   @override
@@ -50,7 +57,23 @@ class _AppFormState extends State<AppForm> {
       crossAxisAlignment: .start,
       spacing: 6.0,
       children: [
-        Text(widget.title, style: bodyRegular),
+        RichText(
+          text: TextSpan(
+            text: widget.title,
+            style: bodyBold,
+            children: [
+              if (widget.isRequired)...[
+                TextSpan(
+                  text: "*",
+                  style: bodyBold.copyWith(
+                    color: AppColors.red,
+                    fontWeight: semiBold,
+                  ),
+                )
+              ]
+            ]
+          )
+        ),
         ValueListenableBuilder(
           valueListenable: _isHide,
           builder: (_, isHide, _) {
@@ -59,6 +82,9 @@ class _AppFormState extends State<AppForm> {
               style: bodyRegular,
               controller: widget.controller,
               obscureText: widget.isPassword ? isHide : false,
+              forceErrorText: widget.forceErrorText,
+              onChanged: widget.onChanged,
+              keyboardType: widget.isPassword ? TextInputType.visiblePassword : widget.keyboardType,
               decoration: InputDecoration(
                 filled: true,
                 fillColor: Colors.white,
@@ -69,7 +95,7 @@ class _AppFormState extends State<AppForm> {
                     return GestureDetector(
                       behavior: HitTestBehavior.translucent,
                       onTap: () => _isHide.value = !_isHide.value,
-                      child: Icon(isHide ? Icons.visibility_off : Icons.visibility, color: AppColors.gray400),
+                      child: Icon(isHide ? Icons.visibility_off : Icons.visibility, color: AppColors.black),
                     );
                   }
                   return widget.suffixIcon;
@@ -78,7 +104,7 @@ class _AppFormState extends State<AppForm> {
                 enabledBorder: _border(borderColor: AppColors.gray400),
                 focusedBorder: _border(borderColor: AppColors.black),
                 errorBorder: _border(borderColor: AppColors.red500),
-                focusedErrorBorder: _border(borderColor: AppColors.black)
+                focusedErrorBorder: _border(borderColor: AppColors.red500)
               ),
             );
           }
