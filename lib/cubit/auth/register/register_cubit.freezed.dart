@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$RegisterState {
 
- ValidatorResult get emailValidation; ValidatorResult get passwordValidation; ValidatorResult get fullNameValidation;
+ ValidatorResult get emailValidation; ValidatorResult get passwordValidation; ValidatorResult get fullNameValidation; ValidatorResult get phoneNumberValidation; bool get isLoading; String? get errorMessage; bool? get isSuccess;
 /// Create a copy of RegisterState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $RegisterStateCopyWith<RegisterState> get copyWith => _$RegisterStateCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is RegisterState&&(identical(other.emailValidation, emailValidation) || other.emailValidation == emailValidation)&&(identical(other.passwordValidation, passwordValidation) || other.passwordValidation == passwordValidation)&&(identical(other.fullNameValidation, fullNameValidation) || other.fullNameValidation == fullNameValidation));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is RegisterState&&(identical(other.emailValidation, emailValidation) || other.emailValidation == emailValidation)&&(identical(other.passwordValidation, passwordValidation) || other.passwordValidation == passwordValidation)&&(identical(other.fullNameValidation, fullNameValidation) || other.fullNameValidation == fullNameValidation)&&(identical(other.phoneNumberValidation, phoneNumberValidation) || other.phoneNumberValidation == phoneNumberValidation)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.isSuccess, isSuccess) || other.isSuccess == isSuccess));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,emailValidation,passwordValidation,fullNameValidation);
+int get hashCode => Object.hash(runtimeType,emailValidation,passwordValidation,fullNameValidation,phoneNumberValidation,isLoading,errorMessage,isSuccess);
 
 @override
 String toString() {
-  return 'RegisterState(emailValidation: $emailValidation, passwordValidation: $passwordValidation, fullNameValidation: $fullNameValidation)';
+  return 'RegisterState(emailValidation: $emailValidation, passwordValidation: $passwordValidation, fullNameValidation: $fullNameValidation, phoneNumberValidation: $phoneNumberValidation, isLoading: $isLoading, errorMessage: $errorMessage, isSuccess: $isSuccess)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $RegisterStateCopyWith<$Res>  {
   factory $RegisterStateCopyWith(RegisterState value, $Res Function(RegisterState) _then) = _$RegisterStateCopyWithImpl;
 @useResult
 $Res call({
- ValidatorResult emailValidation, ValidatorResult passwordValidation, ValidatorResult fullNameValidation
+ ValidatorResult emailValidation, ValidatorResult passwordValidation, ValidatorResult fullNameValidation, ValidatorResult phoneNumberValidation, bool isLoading, String? errorMessage, bool? isSuccess
 });
 
 
@@ -62,12 +62,16 @@ class _$RegisterStateCopyWithImpl<$Res>
 
 /// Create a copy of RegisterState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? emailValidation = null,Object? passwordValidation = null,Object? fullNameValidation = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? emailValidation = null,Object? passwordValidation = null,Object? fullNameValidation = null,Object? phoneNumberValidation = null,Object? isLoading = null,Object? errorMessage = freezed,Object? isSuccess = freezed,}) {
   return _then(_self.copyWith(
 emailValidation: null == emailValidation ? _self.emailValidation : emailValidation // ignore: cast_nullable_to_non_nullable
 as ValidatorResult,passwordValidation: null == passwordValidation ? _self.passwordValidation : passwordValidation // ignore: cast_nullable_to_non_nullable
 as ValidatorResult,fullNameValidation: null == fullNameValidation ? _self.fullNameValidation : fullNameValidation // ignore: cast_nullable_to_non_nullable
-as ValidatorResult,
+as ValidatorResult,phoneNumberValidation: null == phoneNumberValidation ? _self.phoneNumberValidation : phoneNumberValidation // ignore: cast_nullable_to_non_nullable
+as ValidatorResult,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
+as bool,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
+as String?,isSuccess: freezed == isSuccess ? _self.isSuccess : isSuccess // ignore: cast_nullable_to_non_nullable
+as bool?,
   ));
 }
 
@@ -152,10 +156,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( ValidatorResult emailValidation,  ValidatorResult passwordValidation,  ValidatorResult fullNameValidation)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( ValidatorResult emailValidation,  ValidatorResult passwordValidation,  ValidatorResult fullNameValidation,  ValidatorResult phoneNumberValidation,  bool isLoading,  String? errorMessage,  bool? isSuccess)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _RegisterState() when $default != null:
-return $default(_that.emailValidation,_that.passwordValidation,_that.fullNameValidation);case _:
+return $default(_that.emailValidation,_that.passwordValidation,_that.fullNameValidation,_that.phoneNumberValidation,_that.isLoading,_that.errorMessage,_that.isSuccess);case _:
   return orElse();
 
 }
@@ -173,10 +177,10 @@ return $default(_that.emailValidation,_that.passwordValidation,_that.fullNameVal
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( ValidatorResult emailValidation,  ValidatorResult passwordValidation,  ValidatorResult fullNameValidation)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( ValidatorResult emailValidation,  ValidatorResult passwordValidation,  ValidatorResult fullNameValidation,  ValidatorResult phoneNumberValidation,  bool isLoading,  String? errorMessage,  bool? isSuccess)  $default,) {final _that = this;
 switch (_that) {
 case _RegisterState():
-return $default(_that.emailValidation,_that.passwordValidation,_that.fullNameValidation);case _:
+return $default(_that.emailValidation,_that.passwordValidation,_that.fullNameValidation,_that.phoneNumberValidation,_that.isLoading,_that.errorMessage,_that.isSuccess);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -193,10 +197,10 @@ return $default(_that.emailValidation,_that.passwordValidation,_that.fullNameVal
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( ValidatorResult emailValidation,  ValidatorResult passwordValidation,  ValidatorResult fullNameValidation)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( ValidatorResult emailValidation,  ValidatorResult passwordValidation,  ValidatorResult fullNameValidation,  ValidatorResult phoneNumberValidation,  bool isLoading,  String? errorMessage,  bool? isSuccess)?  $default,) {final _that = this;
 switch (_that) {
 case _RegisterState() when $default != null:
-return $default(_that.emailValidation,_that.passwordValidation,_that.fullNameValidation);case _:
+return $default(_that.emailValidation,_that.passwordValidation,_that.fullNameValidation,_that.phoneNumberValidation,_that.isLoading,_that.errorMessage,_that.isSuccess);case _:
   return null;
 
 }
@@ -208,12 +212,16 @@ return $default(_that.emailValidation,_that.passwordValidation,_that.fullNameVal
 
 
 class _RegisterState implements RegisterState {
-  const _RegisterState({required this.emailValidation, required this.passwordValidation, required this.fullNameValidation});
+  const _RegisterState({required this.emailValidation, required this.passwordValidation, required this.fullNameValidation, required this.phoneNumberValidation, required this.isLoading, required this.errorMessage, required this.isSuccess});
   
 
 @override final  ValidatorResult emailValidation;
 @override final  ValidatorResult passwordValidation;
 @override final  ValidatorResult fullNameValidation;
+@override final  ValidatorResult phoneNumberValidation;
+@override final  bool isLoading;
+@override final  String? errorMessage;
+@override final  bool? isSuccess;
 
 /// Create a copy of RegisterState
 /// with the given fields replaced by the non-null parameter values.
@@ -225,16 +233,16 @@ _$RegisterStateCopyWith<_RegisterState> get copyWith => __$RegisterStateCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RegisterState&&(identical(other.emailValidation, emailValidation) || other.emailValidation == emailValidation)&&(identical(other.passwordValidation, passwordValidation) || other.passwordValidation == passwordValidation)&&(identical(other.fullNameValidation, fullNameValidation) || other.fullNameValidation == fullNameValidation));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _RegisterState&&(identical(other.emailValidation, emailValidation) || other.emailValidation == emailValidation)&&(identical(other.passwordValidation, passwordValidation) || other.passwordValidation == passwordValidation)&&(identical(other.fullNameValidation, fullNameValidation) || other.fullNameValidation == fullNameValidation)&&(identical(other.phoneNumberValidation, phoneNumberValidation) || other.phoneNumberValidation == phoneNumberValidation)&&(identical(other.isLoading, isLoading) || other.isLoading == isLoading)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.isSuccess, isSuccess) || other.isSuccess == isSuccess));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,emailValidation,passwordValidation,fullNameValidation);
+int get hashCode => Object.hash(runtimeType,emailValidation,passwordValidation,fullNameValidation,phoneNumberValidation,isLoading,errorMessage,isSuccess);
 
 @override
 String toString() {
-  return 'RegisterState(emailValidation: $emailValidation, passwordValidation: $passwordValidation, fullNameValidation: $fullNameValidation)';
+  return 'RegisterState(emailValidation: $emailValidation, passwordValidation: $passwordValidation, fullNameValidation: $fullNameValidation, phoneNumberValidation: $phoneNumberValidation, isLoading: $isLoading, errorMessage: $errorMessage, isSuccess: $isSuccess)';
 }
 
 
@@ -245,7 +253,7 @@ abstract mixin class _$RegisterStateCopyWith<$Res> implements $RegisterStateCopy
   factory _$RegisterStateCopyWith(_RegisterState value, $Res Function(_RegisterState) _then) = __$RegisterStateCopyWithImpl;
 @override @useResult
 $Res call({
- ValidatorResult emailValidation, ValidatorResult passwordValidation, ValidatorResult fullNameValidation
+ ValidatorResult emailValidation, ValidatorResult passwordValidation, ValidatorResult fullNameValidation, ValidatorResult phoneNumberValidation, bool isLoading, String? errorMessage, bool? isSuccess
 });
 
 
@@ -262,12 +270,16 @@ class __$RegisterStateCopyWithImpl<$Res>
 
 /// Create a copy of RegisterState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? emailValidation = null,Object? passwordValidation = null,Object? fullNameValidation = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? emailValidation = null,Object? passwordValidation = null,Object? fullNameValidation = null,Object? phoneNumberValidation = null,Object? isLoading = null,Object? errorMessage = freezed,Object? isSuccess = freezed,}) {
   return _then(_RegisterState(
 emailValidation: null == emailValidation ? _self.emailValidation : emailValidation // ignore: cast_nullable_to_non_nullable
 as ValidatorResult,passwordValidation: null == passwordValidation ? _self.passwordValidation : passwordValidation // ignore: cast_nullable_to_non_nullable
 as ValidatorResult,fullNameValidation: null == fullNameValidation ? _self.fullNameValidation : fullNameValidation // ignore: cast_nullable_to_non_nullable
-as ValidatorResult,
+as ValidatorResult,phoneNumberValidation: null == phoneNumberValidation ? _self.phoneNumberValidation : phoneNumberValidation // ignore: cast_nullable_to_non_nullable
+as ValidatorResult,isLoading: null == isLoading ? _self.isLoading : isLoading // ignore: cast_nullable_to_non_nullable
+as bool,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
+as String?,isSuccess: freezed == isSuccess ? _self.isSuccess : isSuccess // ignore: cast_nullable_to_non_nullable
+as bool?,
   ));
 }
 

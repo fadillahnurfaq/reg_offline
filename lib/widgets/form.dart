@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:register_offline/utils/colors.dart';
 import 'package:register_offline/utils/text_style.dart';
 
@@ -12,6 +13,7 @@ class AppForm extends StatefulWidget {
   final FocusNode? focusNode;
   final void Function(String value)? onChanged;
   final TextInputType? keyboardType;
+  final List<TextInputFormatter>? inputFormatters;
 
   const AppForm({
     super.key,
@@ -27,6 +29,7 @@ class AppForm extends StatefulWidget {
     this.focusNode,
     this.onChanged,
     this.keyboardType,
+    this.inputFormatters,
   });
 
   @override
@@ -85,6 +88,7 @@ class _AppFormState extends State<AppForm> {
               forceErrorText: widget.forceErrorText,
               onChanged: widget.onChanged,
               keyboardType: widget.isPassword ? TextInputType.visiblePassword : widget.keyboardType,
+              inputFormatters: widget.inputFormatters,
               decoration: InputDecoration(
                 filled: true,
                 fillColor: Colors.white,
