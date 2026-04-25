@@ -14,30 +14,61 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$TabDraftState {
 
-
+ Result<List<MemberModel>> get resultMembers;
+/// Create a copy of TabDraftState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$TabDraftStateCopyWith<TabDraftState> get copyWith => _$TabDraftStateCopyWithImpl<TabDraftState>(this as TabDraftState, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TabDraftState);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TabDraftState&&(identical(other.resultMembers, resultMembers) || other.resultMembers == resultMembers));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,resultMembers);
 
 @override
 String toString() {
-  return 'TabDraftState()';
+  return 'TabDraftState(resultMembers: $resultMembers)';
 }
 
 
 }
 
 /// @nodoc
-class $TabDraftStateCopyWith<$Res>  {
-$TabDraftStateCopyWith(TabDraftState _, $Res Function(TabDraftState) __);
+abstract mixin class $TabDraftStateCopyWith<$Res>  {
+  factory $TabDraftStateCopyWith(TabDraftState value, $Res Function(TabDraftState) _then) = _$TabDraftStateCopyWithImpl;
+@useResult
+$Res call({
+ Result<List<MemberModel>> resultMembers
+});
+
+
+
+
+}
+/// @nodoc
+class _$TabDraftStateCopyWithImpl<$Res>
+    implements $TabDraftStateCopyWith<$Res> {
+  _$TabDraftStateCopyWithImpl(this._self, this._then);
+
+  final TabDraftState _self;
+  final $Res Function(TabDraftState) _then;
+
+/// Create a copy of TabDraftState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? resultMembers = null,}) {
+  return _then(_self.copyWith(
+resultMembers: null == resultMembers ? _self.resultMembers : resultMembers // ignore: cast_nullable_to_non_nullable
+as Result<List<MemberModel>>,
+  ));
+}
+
 }
 
 
@@ -55,11 +86,11 @@ extension TabDraftStatePatterns on TabDraftState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _TabDraftState value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _Initial() when initial != null:
-return initial(_that);case _:
+case _TabDraftState() when $default != null:
+return $default(_that);case _:
   return orElse();
 
 }
@@ -77,11 +108,11 @@ return initial(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,}){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _TabDraftState value)  $default,){
 final _that = this;
 switch (_that) {
-case _Initial():
-return initial(_that);case _:
+case _TabDraftState():
+return $default(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -98,11 +129,11 @@ return initial(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _TabDraftState value)?  $default,){
 final _that = this;
 switch (_that) {
-case _Initial() when initial != null:
-return initial(_that);case _:
+case _TabDraftState() when $default != null:
+return $default(_that);case _:
   return null;
 
 }
@@ -119,10 +150,10 @@ return initial(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Result<List<MemberModel>> resultMembers)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _Initial() when initial != null:
-return initial();case _:
+case _TabDraftState() when $default != null:
+return $default(_that.resultMembers);case _:
   return orElse();
 
 }
@@ -140,10 +171,10 @@ return initial();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Result<List<MemberModel>> resultMembers)  $default,) {final _that = this;
 switch (_that) {
-case _Initial():
-return initial();case _:
+case _TabDraftState():
+return $default(_that.resultMembers);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -160,10 +191,10 @@ return initial();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Result<List<MemberModel>> resultMembers)?  $default,) {final _that = this;
 switch (_that) {
-case _Initial() when initial != null:
-return initial();case _:
+case _TabDraftState() when $default != null:
+return $default(_that.resultMembers);case _:
   return null;
 
 }
@@ -174,33 +205,67 @@ return initial();case _:
 /// @nodoc
 
 
-class _Initial implements TabDraftState {
-  const _Initial();
+class _TabDraftState implements TabDraftState {
+  const _TabDraftState({required this.resultMembers});
   
 
+@override final  Result<List<MemberModel>> resultMembers;
 
-
+/// Create a copy of TabDraftState
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$TabDraftStateCopyWith<_TabDraftState> get copyWith => __$TabDraftStateCopyWithImpl<_TabDraftState>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Initial);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TabDraftState&&(identical(other.resultMembers, resultMembers) || other.resultMembers == resultMembers));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,resultMembers);
 
 @override
 String toString() {
-  return 'TabDraftState.initial()';
+  return 'TabDraftState(resultMembers: $resultMembers)';
 }
 
 
 }
 
+/// @nodoc
+abstract mixin class _$TabDraftStateCopyWith<$Res> implements $TabDraftStateCopyWith<$Res> {
+  factory _$TabDraftStateCopyWith(_TabDraftState value, $Res Function(_TabDraftState) _then) = __$TabDraftStateCopyWithImpl;
+@override @useResult
+$Res call({
+ Result<List<MemberModel>> resultMembers
+});
 
 
+
+
+}
+/// @nodoc
+class __$TabDraftStateCopyWithImpl<$Res>
+    implements _$TabDraftStateCopyWith<$Res> {
+  __$TabDraftStateCopyWithImpl(this._self, this._then);
+
+  final _TabDraftState _self;
+  final $Res Function(_TabDraftState) _then;
+
+/// Create a copy of TabDraftState
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? resultMembers = null,}) {
+  return _then(_TabDraftState(
+resultMembers: null == resultMembers ? _self.resultMembers : resultMembers // ignore: cast_nullable_to_non_nullable
+as Result<List<MemberModel>>,
+  ));
+}
+
+
+}
 
 // dart format on

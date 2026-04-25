@@ -23,6 +23,7 @@ class DashboardView extends StatelessWidget {
       child: DefaultTabController(
         length: 2,
         child: Scaffold(
+          backgroundColor: AppColors.gray200,
           appBar: AppBar(
             title: Row(
               spacing: 8.0,

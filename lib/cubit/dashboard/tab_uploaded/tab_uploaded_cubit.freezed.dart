@@ -14,30 +14,61 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$TabUploadedState {
 
-
+ Result<List<MemberModel>> get resultMembers;
+/// Create a copy of TabUploadedState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$TabUploadedStateCopyWith<TabUploadedState> get copyWith => _$TabUploadedStateCopyWithImpl<TabUploadedState>(this as TabUploadedState, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TabUploadedState);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TabUploadedState&&(identical(other.resultMembers, resultMembers) || other.resultMembers == resultMembers));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,resultMembers);
 
 @override
 String toString() {
-  return 'TabUploadedState()';
+  return 'TabUploadedState(resultMembers: $resultMembers)';
 }
 
 
 }
 
 /// @nodoc
-class $TabUploadedStateCopyWith<$Res>  {
-$TabUploadedStateCopyWith(TabUploadedState _, $Res Function(TabUploadedState) __);
+abstract mixin class $TabUploadedStateCopyWith<$Res>  {
+  factory $TabUploadedStateCopyWith(TabUploadedState value, $Res Function(TabUploadedState) _then) = _$TabUploadedStateCopyWithImpl;
+@useResult
+$Res call({
+ Result<List<MemberModel>> resultMembers
+});
+
+
+
+
+}
+/// @nodoc
+class _$TabUploadedStateCopyWithImpl<$Res>
+    implements $TabUploadedStateCopyWith<$Res> {
+  _$TabUploadedStateCopyWithImpl(this._self, this._then);
+
+  final TabUploadedState _self;
+  final $Res Function(TabUploadedState) _then;
+
+/// Create a copy of TabUploadedState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? resultMembers = null,}) {
+  return _then(_self.copyWith(
+resultMembers: null == resultMembers ? _self.resultMembers : resultMembers // ignore: cast_nullable_to_non_nullable
+as Result<List<MemberModel>>,
+  ));
+}
+
 }
 
 
@@ -55,11 +86,11 @@ extension TabUploadedStatePatterns on TabUploadedState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>(TResult Function( _TabUploadedState value)?  $default,{required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _Initial() when initial != null:
-return initial(_that);case _:
+case _TabUploadedState() when $default != null:
+return $default(_that);case _:
   return orElse();
 
 }
@@ -77,11 +108,11 @@ return initial(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,}){
+@optionalTypeArgs TResult map<TResult extends Object?>(TResult Function( _TabUploadedState value)  $default,){
 final _that = this;
 switch (_that) {
-case _Initial():
-return initial(_that);case _:
+case _TabUploadedState():
+return $default(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -98,11 +129,11 @@ return initial(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>(TResult? Function( _TabUploadedState value)?  $default,){
 final _that = this;
 switch (_that) {
-case _Initial() when initial != null:
-return initial(_that);case _:
+case _TabUploadedState() when $default != null:
+return $default(_that);case _:
   return null;
 
 }
@@ -119,10 +150,10 @@ return initial(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Result<List<MemberModel>> resultMembers)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _Initial() when initial != null:
-return initial();case _:
+case _TabUploadedState() when $default != null:
+return $default(_that.resultMembers);case _:
   return orElse();
 
 }
@@ -140,10 +171,10 @@ return initial();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Result<List<MemberModel>> resultMembers)  $default,) {final _that = this;
 switch (_that) {
-case _Initial():
-return initial();case _:
+case _TabUploadedState():
+return $default(_that.resultMembers);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -160,10 +191,10 @@ return initial();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Result<List<MemberModel>> resultMembers)?  $default,) {final _that = this;
 switch (_that) {
-case _Initial() when initial != null:
-return initial();case _:
+case _TabUploadedState() when $default != null:
+return $default(_that.resultMembers);case _:
   return null;
 
 }
@@ -174,33 +205,67 @@ return initial();case _:
 /// @nodoc
 
 
-class _Initial implements TabUploadedState {
-  const _Initial();
+class _TabUploadedState implements TabUploadedState {
+  const _TabUploadedState({required this.resultMembers});
   
 
+@override final  Result<List<MemberModel>> resultMembers;
 
-
+/// Create a copy of TabUploadedState
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$TabUploadedStateCopyWith<_TabUploadedState> get copyWith => __$TabUploadedStateCopyWithImpl<_TabUploadedState>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Initial);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TabUploadedState&&(identical(other.resultMembers, resultMembers) || other.resultMembers == resultMembers));
 }
 
 
 @override
-int get hashCode => runtimeType.hashCode;
+int get hashCode => Object.hash(runtimeType,resultMembers);
 
 @override
 String toString() {
-  return 'TabUploadedState.initial()';
+  return 'TabUploadedState(resultMembers: $resultMembers)';
 }
 
 
 }
 
+/// @nodoc
+abstract mixin class _$TabUploadedStateCopyWith<$Res> implements $TabUploadedStateCopyWith<$Res> {
+  factory _$TabUploadedStateCopyWith(_TabUploadedState value, $Res Function(_TabUploadedState) _then) = __$TabUploadedStateCopyWithImpl;
+@override @useResult
+$Res call({
+ Result<List<MemberModel>> resultMembers
+});
 
 
+
+
+}
+/// @nodoc
+class __$TabUploadedStateCopyWithImpl<$Res>
+    implements _$TabUploadedStateCopyWith<$Res> {
+  __$TabUploadedStateCopyWithImpl(this._self, this._then);
+
+  final _TabUploadedState _self;
+  final $Res Function(_TabUploadedState) _then;
+
+/// Create a copy of TabUploadedState
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? resultMembers = null,}) {
+  return _then(_TabUploadedState(
+resultMembers: null == resultMembers ? _self.resultMembers : resultMembers // ignore: cast_nullable_to_non_nullable
+as Result<List<MemberModel>>,
+  ));
+}
+
+
+}
 
 // dart format on

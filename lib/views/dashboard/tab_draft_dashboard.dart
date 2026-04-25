@@ -1,21 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:register_offline/cubit/dashboard/tab_draft/tab_draft_cubit.dart';
+import 'package:register_offline/services/member_service.dart';
 import 'package:register_offline/utils/colors.dart';
 import 'package:register_offline/utils/extensions/build_context_extension.dart';
+import 'package:register_offline/utils/injector.dart';
 import 'package:register_offline/utils/text_style.dart';
 import 'package:register_offline/views/draft/create_draft_view.dart';
 
 import '../../widgets/button.dart';
 
-class TabDraftDashboard extends StatelessWidget {
+class TabDraftDashboard extends StatefulWidget {
   const TabDraftDashboard({super.key});
 
   @override
+  State<TabDraftDashboard> createState() => _TabDraftDashboardState();
+}
+
+class _TabDraftDashboardState extends State<TabDraftDashboard> with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return BlocProvider(
-      create: (context) => TabDraftCubit(),
+      create: (context) => TabDraftCubit(
+        memberService: locator<MemberService>()
+      ),
       child: Scaffold(
+        backgroundColor: AppColors.gray200,
         body: CustomScrollView(
           slivers: [
             SliverPadding(
@@ -38,7 +52,7 @@ class TabDraftDashboard extends StatelessWidget {
                         Container(
                           padding: const EdgeInsets.all(10.0),
                           decoration: BoxDecoration(
-                            color: AppColors.gray200,
+                            color: AppColors.gray300,
                             borderRadius: BorderRadius.circular(8.0)
                           ),
                           child: Row(

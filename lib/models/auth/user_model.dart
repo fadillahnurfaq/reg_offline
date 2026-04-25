@@ -1,6 +1,6 @@
 import 'package:register_offline/utils/dio_service/dio_service_response.dart';
 
-class UserModel with DioServiceResponse {
+class UserModel with DioServiceResponse<UserModel> {
   final String id;
   final String fullName;
   final String email;
