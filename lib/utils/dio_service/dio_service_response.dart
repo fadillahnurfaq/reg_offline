@@ -4,15 +4,18 @@ mixin DioServiceResponse<T> {
     return null;
   }
 
-  List<T> fromResponseList(List? json) {
+  List<T> fromResponseList(dynamic json) {
     final rawList = json;
-    return rawList?.map<T>((e) {
+    if (rawList is! List) {
+      return [];
+    }
+    return rawList.map<T>((e) {
       final rawToElementMap = toElementMap(e, null);
       if (rawToElementMap != null) {
         return rawToElementMap;
       }
       return fromResponseMap(e) as T;
-    }).toList() ?? [];
+    }).toList();
   }
   
   T? fromResponseValue(dynamic value) {

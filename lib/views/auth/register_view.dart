@@ -142,7 +142,7 @@ class RegisterView extends StatelessWidget {
                                 width: double.infinity,
                                 onPressed: context.read<RegisterCubit>().register,
                                 disabled: !context.read<RegisterCubit>().isValid,
-                                label: "Masuk",
+                                label: "Daftar",
                               );
                             },
                           ),

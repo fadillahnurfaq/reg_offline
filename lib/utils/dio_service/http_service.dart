@@ -36,13 +36,15 @@ class HttpService {
     try {
       T onMap(Response<dynamic> response) {
         if (fromResponseMap != null || fromResponseList != null || fromResponseValue != null) {
-          if (response.data is Map<String, dynamic>) {
-            return fromResponseMap!(response.data);
+          if (fromResponseMap != null) {
+            return fromResponseMap(response.data);
           }
-          if (response.data is List) {
-            return fromResponseList!(response.data);
+          if (fromResponseList != null) {
+            return fromResponseList(response.data);
           }
-          return fromResponseValue!(response.data);
+          if (fromResponseValue != null) {
+            return fromResponseValue(response.data);
+          }
         }
         return response.data;
       }
@@ -57,6 +59,7 @@ class HttpService {
     } on DioException catch (e) {
       return Left(_fromDioError(e));
     } catch (e) {
+      print("Datanya $e");
       return Left(
         ApiException(
           statusCode: null,
