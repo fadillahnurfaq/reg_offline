@@ -76,7 +76,7 @@ class AppButton extends StatelessWidget {
               backgroundColor: backgroundColor,
               disabledBackgroundColor: AppColors.gray300,
               shadowColor: Colors.transparent,
-              overlayColor: overlayColor ?? AppColors.gray200,
+              overlayColor: overlayColor ?? AppColors.gray400,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(borderRadius),
               ),
@@ -87,7 +87,7 @@ class AppButton extends StatelessWidget {
             onPressed: disabled ? null : onPressed,
             style: OutlinedButton.styleFrom(
               backgroundColor: backgroundColor,
-              overlayColor: overlayColor ?? AppColors.gray200,
+              overlayColor: overlayColor ?? AppColors.gray400,
               side: BorderSide(
                 color: disabled ? Colors.grey : sideColor!,
                 width: sideWidth!,

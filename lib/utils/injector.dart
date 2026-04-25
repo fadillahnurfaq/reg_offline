@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:register_offline/services/auth_service.dart';
+import 'package:register_offline/services/member_service.dart';
 
 import 'dio_service/http_service.dart';
 
@@ -10,6 +11,7 @@ class Injector {
   
   static void setUp() {
     locator.registerLazySingleton<AuthService>(() => AuthService(httpService: locator<HttpService>()));
+    locator.registerLazySingleton<MemberService>(() => MemberService(httpService: locator<HttpService>()));
     locator.registerLazySingleton<HttpService>(() => const HttpService());
   }
 }

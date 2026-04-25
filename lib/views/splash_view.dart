@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:register_offline/utils/colors.dart';
-import 'package:register_offline/utils/extension/build_context_extension.dart';
+import 'package:register_offline/utils/extensions/build_context_extension.dart';
 import 'package:register_offline/utils/text_style.dart';
 import 'package:register_offline/views/auth/login_view.dart';
 import 'package:register_offline/views/dashboard/dashboard_view.dart';

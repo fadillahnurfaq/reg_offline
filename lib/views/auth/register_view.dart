@@ -4,7 +4,7 @@ import 'package:register_offline/cubit/auth/register/register_cubit.dart';
 import 'package:register_offline/services/auth_service.dart';
 import 'package:register_offline/utils/colors.dart';
 import 'package:register_offline/utils/dialog_helper.dart';
-import 'package:register_offline/utils/extension/build_context_extension.dart';
+import 'package:register_offline/utils/extensions/build_context_extension.dart';
 import 'package:register_offline/utils/injector.dart';
 import 'package:register_offline/utils/text_style.dart';
 import 'package:register_offline/views/auth/login_view.dart';

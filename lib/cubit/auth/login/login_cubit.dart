@@ -52,7 +52,7 @@ class LoginCubit extends Cubit<LoginState> {
 
   Future<void> register() async {
     if (!isValid) return;
-    emit(state.copyWith(isLoading: true));
+    emit(state.copyWith(isLoading: true, errorMessage: null, isSuccess: null));
 
     final parameter = LoginParameter(
       email: emailController.text.trim(),

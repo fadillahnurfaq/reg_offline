@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:register_offline/cubit/auth/login/login_cubit.dart';
 import 'package:register_offline/services/auth_service.dart';
 import 'package:register_offline/utils/colors.dart';
-import 'package:register_offline/utils/extension/build_context_extension.dart';
+import 'package:register_offline/utils/extensions/build_context_extension.dart';
 import 'package:register_offline/utils/injector.dart';
 import 'package:register_offline/utils/text_style.dart';
 import 'package:register_offline/views/auth/register_view.dart';
@@ -80,40 +80,26 @@ class LoginView extends StatelessWidget {
                           ),
                           const SizedBox(height: 16.0),
                           BlocBuilder<LoginCubit, LoginState>(
-                            buildWhen: (previous, current) =>
-                                previous.emailValidation !=
-                                current.emailValidation,
+                            buildWhen: (previous, current) => previous.emailValidation != current.emailValidation,
                             builder: (context, state) {
                               return AppForm(
                                 title: "Email",
                                 isRequired: true,
-                                controller: context
-                                    .read<LoginCubit>()
-                                    .emailController,
-                                forceErrorText:
-                                    state.emailValidation.errorMessage,
-                                onChanged: (value) => context
-                                    .read<LoginCubit>()
-                                    .validateEmail(value),
+                                controller: context.read<LoginCubit>().emailController,
+                                forceErrorText: state.emailValidation.errorMessage,
+                                onChanged: (value) => context.read<LoginCubit>().validateEmail(value),
                               );
                             },
                           ),
                           const SizedBox(height: 16.0),
                           BlocBuilder<LoginCubit, LoginState>(
-                            buildWhen: (previous, current) =>
-                                previous.passwordValidation !=
-                                current.passwordValidation,
+                            buildWhen: (previous, current) => previous.passwordValidation != current.passwordValidation,
                             builder: (context, state) {
                               return AppForm(
                                 title: "Password",
-                                controller: context
-                                    .read<LoginCubit>()
-                                    .passwordController,
-                                forceErrorText:
-                                    state.passwordValidation.errorMessage,
-                                onChanged: (value) => context
-                                    .read<LoginCubit>()
-                                    .validatePassword(value),
+                                controller: context.read<LoginCubit>().passwordController,
+                                forceErrorText: state.passwordValidation.errorMessage,
+                                onChanged: (value) => context.read<LoginCubit>().validatePassword(value),
                                 isPassword: true,
                                 isRequired: true,
                               );

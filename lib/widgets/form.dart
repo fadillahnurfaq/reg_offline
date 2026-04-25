@@ -4,7 +4,7 @@ import 'package:register_offline/utils/colors.dart';
 import 'package:register_offline/utils/text_style.dart';
 
 class AppForm extends StatefulWidget {
-  final String title;
+  final String? title;
   final bool isRequired;
   final TextEditingController? controller;
   final Widget? prefixIcon, suffixIcon;
@@ -14,10 +14,14 @@ class AppForm extends StatefulWidget {
   final void Function(String value)? onChanged;
   final TextInputType? keyboardType;
   final List<TextInputFormatter>? inputFormatters;
+  final bool isReadOnly;
+  final bool showCounterText;
+  final void Function()? onTap;
+  final int? maxLength;
 
   const AppForm({
     super.key,
-    required this.title,
+    this.title,
     this.isRequired = false,
     this.controller,
     this.prefixIcon,
@@ -30,6 +34,10 @@ class AppForm extends StatefulWidget {
     this.onChanged,
     this.keyboardType,
     this.inputFormatters,
+    this.isReadOnly = false,
+    this.showCounterText = false,
+    this.onTap,
+    this.maxLength,
   });
 
   @override
@@ -60,23 +68,25 @@ class _AppFormState extends State<AppForm> {
       crossAxisAlignment: .start,
       spacing: 6.0,
       children: [
-        RichText(
-          text: TextSpan(
-            text: widget.title,
-            style: bodyBold,
-            children: [
-              if (widget.isRequired)...[
-                TextSpan(
-                  text: "*",
-                  style: bodyBold.copyWith(
-                    color: AppColors.red,
-                    fontWeight: semiBold,
-                  ),
-                )
+        if (widget.title != null)...[
+          RichText(
+            text: TextSpan(
+              text: widget.title,
+              style: bodyBold,
+              children: [
+                if (widget.isRequired)...[
+                  TextSpan(
+                    text: "*",
+                    style: bodyBold.copyWith(
+                      color: AppColors.red,
+                      fontWeight: semiBold,
+                    ),
+                  )
+                ]
               ]
-            ]
-          )
-        ),
+            )
+          ),
+        ],
         ValueListenableBuilder(
           valueListenable: _isHide,
           builder: (_, isHide, _) {
@@ -89,11 +99,15 @@ class _AppFormState extends State<AppForm> {
               onChanged: widget.onChanged,
               keyboardType: widget.isPassword ? TextInputType.visiblePassword : widget.keyboardType,
               inputFormatters: widget.inputFormatters,
+              readOnly: widget.isReadOnly,
+              onTap: widget.onTap,
+              maxLength: widget.maxLength,
               decoration: InputDecoration(
                 filled: true,
                 fillColor: Colors.white,
                 hintText: widget.hintText,
                 prefixIcon: widget.prefixIcon,
+                counterText: widget.showCounterText ? null : "",
                 suffixIcon: () {
                   if (widget.isPassword) {
                     return GestureDetector(

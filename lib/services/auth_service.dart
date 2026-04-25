@@ -1,4 +1,6 @@
 import 'package:dartz/dartz.dart';
+import 'package:register_offline/models/auth/get_user_parameter.dart';
+import 'package:register_offline/models/auth/user_model.dart';
 import '../models/api_exception.dart';
 import '../models/auth/login_parameter.dart';
 import '../models/auth/login_response_model.dart';
@@ -16,5 +18,9 @@ class AuthService {
 
   Future<Either<ApiException, dynamic>> register({required final RegisterParameter parameter}) async{
     return httpService.request(request: parameter);
+  }
+
+  Future<Either<ApiException, UserModel>> getUser({required final GetUserParameter parameter}) async{
+    return httpService.request(request: parameter, fromResponseMap: const UserModel().fromResponseMap);
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:register_offline/utils/colors.dart';
 
-import 'extension/build_context_extension.dart';
+import 'extensions/build_context_extension.dart';
 import 'text_style.dart';
 
 

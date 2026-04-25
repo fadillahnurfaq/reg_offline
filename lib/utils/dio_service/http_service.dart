@@ -4,6 +4,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+import 'package:register_offline/utils/secure_storage_manager.dart';
 import '../../models/api_exception.dart';
 import '../../models/response_model.dart';
 import 'dio_service_request.dart';
@@ -32,6 +33,7 @@ class HttpService {
     T Function(List? data)? fromResponseList,
     T Function(dynamic value)? fromResponseValue,
   }) async {
+    try {
       T onMap(Response<dynamic> response) {
         if (fromResponseMap != null || fromResponseList != null || fromResponseValue != null) {
           if (response.data is Map<String, dynamic>) {
@@ -49,14 +51,29 @@ class HttpService {
         "$baseUrl${request.getPath}",
         data: await request.dataJson,
         queryParameters: request.queryParam,
-        options: _checkOptions(request.getDioMethod.name, request.options),
+        options: await _checkOptions(request.getDioMethod.name, request.options),
       );
       return right(onMap(response));
+    } on DioException catch (e) {
+      return Left(_fromDioError(e));
+    } catch (e) {
+      return Left(
+        ApiException(
+          statusCode: null,
+          message: "Terjadi kesalahan pada aplikasi, silakan coba lagi nanti.",
+        ),
+      );
+    }
   }
 
-  Options _checkOptions(String method, Options? options) {
+  Future<Options> _checkOptions(String method, Options? options) async {
     options ??= Options();
     options.method = method;
+    final token = await SecureStorageManager.instance.getToken();
+    if (token?.isNotEmpty ?? false) {
+      options.headers ??= {};
+      options.headers!['Authorization'] = 'Bearer $token';
+    }
     return options;
   }
 
