@@ -9,9 +9,10 @@ import 'package:register_offline/utils/colors.dart';
 import 'package:register_offline/utils/extensions/build_context_extension.dart';
 import 'package:register_offline/utils/extensions/datetime_extension.dart';
 import 'package:register_offline/utils/injector.dart';
+import 'package:register_offline/utils/main_route_observer.dart';
 import 'package:register_offline/utils/text_style.dart';
 import 'package:register_offline/widgets/form.dart';
-
+import '../../services/member_local_service.dart';
 import '../../utils/dialog_helper.dart';
 import '../../utils/global_func.dart';
 import '../../widgets/button.dart';
@@ -27,12 +28,14 @@ class CreateDraftView extends StatelessWidget {
       onTap: context.hideKeyboard,
       child: BlocProvider(
         create: (context) => CreateDraftCubit(
-          memberService: locator<MemberService>()
+          memberService: locator<MemberService>(),
+          memberLocalService: locator<MemberLocalService>(),
         ),
         child: BlocListener<CreateDraftCubit, CreateDraftState>(
           listenWhen: (previous, current) => previous.isSubmitting != current.isSubmitting 
             || previous.errorMessage != current.errorMessage 
-            || previous.isSuccess != current.isSuccess,
+            || previous.isSuccessUpload != current.isSuccessUpload
+            || previous.isSuccessSavedDraft != current.isSuccessSavedDraft,
           listener: (context, state) {
             if (state.isSubmitting) {
               context.hideKeyboard();
@@ -45,8 +48,14 @@ class CreateDraftView extends StatelessWidget {
               DialogHelper.showSnacbar(context: context, message: state.errorMessage!);
             }
 
-            if (state.isSuccess == true) {
+            if (state.isSuccessUpload == true) {
               context.pop();
+              locator<MainRouteObserver>().onRefreshUploadedMember?.call();
+            }
+
+            if (state.isSuccessSavedDraft == true) {
+              context.pop();
+              locator<MainRouteObserver>().onRefreshDraftMember?.call();
             }
           },
           child: Scaffold(
@@ -266,9 +275,17 @@ class CreateDraftView extends StatelessWidget {
                               color: AppColors.primary,
                             ),
                           ),
-                          AppForm(
-                            title: "Nama Lengkap",
-                            controller: context.read<CreateDraftCubit>().fullNameController,
+                          BlocBuilder<CreateDraftCubit, CreateDraftState>(
+                            buildWhen: (previous, current) => previous.fullNameValidation != current.fullNameValidation,
+                            builder: (context, state) {
+                              return AppForm(
+                                title: "Nama Lengkap",
+                                isRequired: true,
+                                controller: context.read<CreateDraftCubit>().fullNameController,
+                                forceErrorText: state.fullNameValidation.errorMessage,
+                                onChanged: (value) => context.read<CreateDraftCubit>().validateFullName(value),
+                              );
+                            },
                           ),
                           AppForm(
                             title: "Tempat Lahir",
@@ -558,7 +575,7 @@ class CreateDraftView extends StatelessWidget {
                         builder: (context, state) {
                           return AppButton.outlined(
                             width: double.infinity,
-                            onPressed: () {},
+                            onPressed: context.read<CreateDraftCubit>().saveDraft,
                             disabled: !context.read<CreateDraftCubit>().isEligibleToSubmit,
                             sideColor: AppColors.primary,
                             label: "Simpan sebagai Draft",

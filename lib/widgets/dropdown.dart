@@ -113,7 +113,7 @@ class _DropdownBasedPopUpState<T> extends State<DropdownBasedPopUp<T>> {
   Widget _buildList(List<T> dataList) {
     return ValueListenableBuilder<String>(
       valueListenable: _keywordNotifier,
-      builder: (_, keyword, __) {
+      builder: (_, keyword, _) {
         final filtered =
             _filterData(keyword: keyword, dataList: dataList);
 

@@ -15,6 +15,6 @@ class MemberService {
   }
 
   Future<Either<ApiException, List<MemberModel>>> getList({required final GetMemberParameter parameter}) async{
-    return httpService.request(request: parameter, fromResponseList: const MemberModel().fromResponseList);
+    return httpService.request(request: parameter, fromResponseList: MemberModel().fromResponseList);
   }
 }

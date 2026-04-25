@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
 
 class GlobalFunc {
   GlobalFunc._();
+
+  static const Uuid _uuid = Uuid();
 
   static Future<void> pickDate({required final BuildContext context, required final DateTime? selectedDate, required final Function(DateTime dateTime) onDateSelected}) {
     return showDatePicker(
@@ -18,5 +21,9 @@ class GlobalFunc {
 
   static String getFileName(String filePath) {
     return filePath.split('/').last;
+  }
+
+  static String generateRandomId() {
+    return _uuid.v4();
   }
 }

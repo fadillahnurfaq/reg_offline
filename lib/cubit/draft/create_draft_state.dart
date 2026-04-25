@@ -5,6 +5,7 @@ abstract class CreateDraftState with _$CreateDraftState {
   const factory CreateDraftState({
     required final ValidatorResult phoneNumberValidation,
     required final ValidatorResult nikValidation,
+    required final ValidatorResult fullNameValidation,
     final File? primaryIndentityPhoto,
     final File? secondaryIndentityPhoto,
     final DateTime? dateOfBirth,
@@ -17,13 +18,15 @@ abstract class CreateDraftState with _$CreateDraftState {
     final String? subDistrict,
     required final bool isSubmitting,
     final String? errorMessage,
-    final bool? isSuccess,
+    final bool? isSuccessUpload,
+    final bool? isSuccessSavedDraft,
   }) = _CreateDraftState;
 
   factory CreateDraftState.initial() {
     return CreateDraftState(
       phoneNumberValidation: InitialValidationResult(),
       nikValidation: InitialValidationResult(),
+      fullNameValidation: InitialValidationResult(),
       isSubmitting: false
     );
   }

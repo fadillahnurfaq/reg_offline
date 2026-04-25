@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$TabDraftState {
 
- Result<List<MemberModel>> get resultMembers;
+ Result<List<MemberModel>> get resultMembers; bool get isSubmitting; String? get errorMessage; bool? get isSuccessUpload;
 /// Create a copy of TabDraftState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $TabDraftStateCopyWith<TabDraftState> get copyWith => _$TabDraftStateCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TabDraftState&&(identical(other.resultMembers, resultMembers) || other.resultMembers == resultMembers));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TabDraftState&&(identical(other.resultMembers, resultMembers) || other.resultMembers == resultMembers)&&(identical(other.isSubmitting, isSubmitting) || other.isSubmitting == isSubmitting)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.isSuccessUpload, isSuccessUpload) || other.isSuccessUpload == isSuccessUpload));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,resultMembers);
+int get hashCode => Object.hash(runtimeType,resultMembers,isSubmitting,errorMessage,isSuccessUpload);
 
 @override
 String toString() {
-  return 'TabDraftState(resultMembers: $resultMembers)';
+  return 'TabDraftState(resultMembers: $resultMembers, isSubmitting: $isSubmitting, errorMessage: $errorMessage, isSuccessUpload: $isSuccessUpload)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $TabDraftStateCopyWith<$Res>  {
   factory $TabDraftStateCopyWith(TabDraftState value, $Res Function(TabDraftState) _then) = _$TabDraftStateCopyWithImpl;
 @useResult
 $Res call({
- Result<List<MemberModel>> resultMembers
+ Result<List<MemberModel>> resultMembers, bool isSubmitting, String? errorMessage, bool? isSuccessUpload
 });
 
 
@@ -62,10 +62,13 @@ class _$TabDraftStateCopyWithImpl<$Res>
 
 /// Create a copy of TabDraftState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? resultMembers = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? resultMembers = null,Object? isSubmitting = null,Object? errorMessage = freezed,Object? isSuccessUpload = freezed,}) {
   return _then(_self.copyWith(
 resultMembers: null == resultMembers ? _self.resultMembers : resultMembers // ignore: cast_nullable_to_non_nullable
-as Result<List<MemberModel>>,
+as Result<List<MemberModel>>,isSubmitting: null == isSubmitting ? _self.isSubmitting : isSubmitting // ignore: cast_nullable_to_non_nullable
+as bool,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
+as String?,isSuccessUpload: freezed == isSuccessUpload ? _self.isSuccessUpload : isSuccessUpload // ignore: cast_nullable_to_non_nullable
+as bool?,
   ));
 }
 
@@ -150,10 +153,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Result<List<MemberModel>> resultMembers)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( Result<List<MemberModel>> resultMembers,  bool isSubmitting,  String? errorMessage,  bool? isSuccessUpload)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _TabDraftState() when $default != null:
-return $default(_that.resultMembers);case _:
+return $default(_that.resultMembers,_that.isSubmitting,_that.errorMessage,_that.isSuccessUpload);case _:
   return orElse();
 
 }
@@ -171,10 +174,10 @@ return $default(_that.resultMembers);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Result<List<MemberModel>> resultMembers)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( Result<List<MemberModel>> resultMembers,  bool isSubmitting,  String? errorMessage,  bool? isSuccessUpload)  $default,) {final _that = this;
 switch (_that) {
 case _TabDraftState():
-return $default(_that.resultMembers);case _:
+return $default(_that.resultMembers,_that.isSubmitting,_that.errorMessage,_that.isSuccessUpload);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -191,10 +194,10 @@ return $default(_that.resultMembers);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Result<List<MemberModel>> resultMembers)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( Result<List<MemberModel>> resultMembers,  bool isSubmitting,  String? errorMessage,  bool? isSuccessUpload)?  $default,) {final _that = this;
 switch (_that) {
 case _TabDraftState() when $default != null:
-return $default(_that.resultMembers);case _:
+return $default(_that.resultMembers,_that.isSubmitting,_that.errorMessage,_that.isSuccessUpload);case _:
   return null;
 
 }
@@ -206,10 +209,13 @@ return $default(_that.resultMembers);case _:
 
 
 class _TabDraftState implements TabDraftState {
-  const _TabDraftState({required this.resultMembers});
+  const _TabDraftState({required this.resultMembers, required this.isSubmitting, this.errorMessage, this.isSuccessUpload});
   
 
 @override final  Result<List<MemberModel>> resultMembers;
+@override final  bool isSubmitting;
+@override final  String? errorMessage;
+@override final  bool? isSuccessUpload;
 
 /// Create a copy of TabDraftState
 /// with the given fields replaced by the non-null parameter values.
@@ -221,16 +227,16 @@ _$TabDraftStateCopyWith<_TabDraftState> get copyWith => __$TabDraftStateCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TabDraftState&&(identical(other.resultMembers, resultMembers) || other.resultMembers == resultMembers));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TabDraftState&&(identical(other.resultMembers, resultMembers) || other.resultMembers == resultMembers)&&(identical(other.isSubmitting, isSubmitting) || other.isSubmitting == isSubmitting)&&(identical(other.errorMessage, errorMessage) || other.errorMessage == errorMessage)&&(identical(other.isSuccessUpload, isSuccessUpload) || other.isSuccessUpload == isSuccessUpload));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,resultMembers);
+int get hashCode => Object.hash(runtimeType,resultMembers,isSubmitting,errorMessage,isSuccessUpload);
 
 @override
 String toString() {
-  return 'TabDraftState(resultMembers: $resultMembers)';
+  return 'TabDraftState(resultMembers: $resultMembers, isSubmitting: $isSubmitting, errorMessage: $errorMessage, isSuccessUpload: $isSuccessUpload)';
 }
 
 
@@ -241,7 +247,7 @@ abstract mixin class _$TabDraftStateCopyWith<$Res> implements $TabDraftStateCopy
   factory _$TabDraftStateCopyWith(_TabDraftState value, $Res Function(_TabDraftState) _then) = __$TabDraftStateCopyWithImpl;
 @override @useResult
 $Res call({
- Result<List<MemberModel>> resultMembers
+ Result<List<MemberModel>> resultMembers, bool isSubmitting, String? errorMessage, bool? isSuccessUpload
 });
 
 
@@ -258,10 +264,13 @@ class __$TabDraftStateCopyWithImpl<$Res>
 
 /// Create a copy of TabDraftState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? resultMembers = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? resultMembers = null,Object? isSubmitting = null,Object? errorMessage = freezed,Object? isSuccessUpload = freezed,}) {
   return _then(_TabDraftState(
 resultMembers: null == resultMembers ? _self.resultMembers : resultMembers // ignore: cast_nullable_to_non_nullable
-as Result<List<MemberModel>>,
+as Result<List<MemberModel>>,isSubmitting: null == isSubmitting ? _self.isSubmitting : isSubmitting // ignore: cast_nullable_to_non_nullable
+as bool,errorMessage: freezed == errorMessage ? _self.errorMessage : errorMessage // ignore: cast_nullable_to_non_nullable
+as String?,isSuccessUpload: freezed == isSuccessUpload ? _self.isSuccessUpload : isSuccessUpload // ignore: cast_nullable_to_non_nullable
+as bool?,
   ));
 }
 

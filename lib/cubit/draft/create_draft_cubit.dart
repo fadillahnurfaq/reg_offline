@@ -4,6 +4,8 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:register_offline/models/member/create_member_parameter.dart';
+import 'package:register_offline/models/member/member_model.dart';
+import 'package:register_offline/services/member_local_service.dart';
 import 'package:register_offline/services/member_service.dart';
 import 'package:register_offline/utils/validator/validator_result.dart';
 
@@ -12,8 +14,11 @@ part 'create_draft_cubit.freezed.dart';
 
 class CreateDraftCubit extends Cubit<CreateDraftState> {
   final MemberService memberService;
+  final MemberLocalService memberLocalService;
+
   CreateDraftCubit({
     required this.memberService,
+    required this.memberLocalService,
   }) : super(CreateDraftState.initial());
 
   final TextEditingController phoneNumberController = TextEditingController();
@@ -81,6 +86,18 @@ class CreateDraftCubit extends Cubit<CreateDraftState> {
     }
   }
 
+  void validateFullName(String fullName) {
+    if (fullName.isEmpty) {
+      emit(state.copyWith(
+        fullNameValidation: FailedValidationResult("Nama lengkap tidak boleh kosong")
+      ));
+    } else {
+      emit(state.copyWith(
+        fullNameValidation: SuccessValidationResult()
+      ));
+    }
+  }
+
   void setPrimaryIdentityPhoto(File photo) {
     emit(state.copyWith(primaryIndentityPhoto: photo));
   }
@@ -125,11 +142,12 @@ class CreateDraftCubit extends Cubit<CreateDraftState> {
     return state.phoneNumberValidation is SuccessValidationResult 
       && state.nikValidation is SuccessValidationResult 
       && state.primaryIndentityPhoto != null 
-      && state.secondaryIndentityPhoto != null;
+      && state.secondaryIndentityPhoto != null
+      && state.fullNameValidation is SuccessValidationResult;
   }
 
   Future<void> upload() async {
-    emit(state.copyWith(isSubmitting: true, errorMessage: null, isSuccess: null));
+    emit(state.copyWith(isSubmitting: true, errorMessage: null, isSuccessUpload: null));
     final parameter = CreateMemberParameter(
       name: fullNameController.text.trim(),
       nik: nikController.text.trim(),
@@ -146,12 +164,43 @@ class CreateDraftCubit extends Cubit<CreateDraftState> {
       district: state.district,
       subDistrict: state.subDistrict,
       postalCode: postalCodeController.text.trim(),
+      syncType: MemberSyncType.uploaded,
     );
     final result = await memberService.create(parameter: parameter);
     result.fold((failure) {
-      emit(state.copyWith(isSubmitting: false, errorMessage: failure.message, isSuccess: false));
+      emit(state.copyWith(isSubmitting: false, errorMessage: failure.message, isSuccessUpload: false));
     }, (success) {
-      emit(state.copyWith(isSubmitting: false, isSuccess: true, errorMessage: null));
+      emit(state.copyWith(isSubmitting: false, isSuccessUpload: true, errorMessage: null));
+    });
+  }
+
+  Future<void> saveDraft() async {
+    emit(state.copyWith(isSubmitting: true, errorMessage: null, isSuccessSavedDraft: null));
+    final parameter = CreateMemberParameter(
+      name: fullNameController.text.trim(),
+      nik: nikController.text.trim(),
+      phone: phoneNumberController.text.trim(),
+      primaryIdentityPhoto: state.primaryIndentityPhoto,
+      secondaryIdentityPhoto: state.secondaryIndentityPhoto,
+      birthPlace: placeOfBirthController.text.trim(),
+      birthDate: state.dateOfBirth,
+      status: state.status,
+      occupation: state.occupation,
+      address: addressController.text.trim(),
+      province: state.province,
+      city: state.city,
+      district: state.district,
+      subDistrict: state.subDistrict,
+      postalCode: postalCodeController.text.trim(),
+      gender: state.gender,
+      syncType: MemberSyncType.draft,
+    );
+
+    final result = await memberLocalService.createOrEdit(await parameter.toMember());
+    result.fold((failure) {
+      emit(state.copyWith(isSubmitting: false, errorMessage: failure, isSuccessSavedDraft: false));
+    }, (success) {
+      emit(state.copyWith(isSubmitting: false, isSuccessSavedDraft: true, errorMessage: null));
     });
   }
 }

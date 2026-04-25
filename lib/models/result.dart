@@ -15,10 +15,6 @@ sealed class Result<T> {
 
   T? get resultValue => isSuccess ? (this as Success<T>).value : null;
   String? get errorMessage => isFailed ? (this as Failed<T>).message : null;
-
-  int? get length => null;
-
-  operator [](int other) {}
 }
 
 class Initial<T> extends Result<T> {

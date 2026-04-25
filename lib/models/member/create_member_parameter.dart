@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:dio/dio.dart';
+import 'package:register_offline/models/member/member_model.dart';
 import 'package:register_offline/utils/dio_service/dio_service_request.dart';
 import 'package:register_offline/utils/extensions/datetime_extension.dart';
 import 'package:register_offline/utils/global_func.dart';
@@ -12,6 +13,7 @@ class CreateMemberParameter with DioServiceRequest {
   final File? secondaryIdentityPhoto;
   final String? birthPlace;
   final DateTime? birthDate;
+  final String? gender;
   final String? status;
   final String? occupation;
   final String? address;
@@ -20,6 +22,7 @@ class CreateMemberParameter with DioServiceRequest {
   final String? district;
   final String? subDistrict;
   final String? postalCode;
+  final MemberSyncType syncType;
 
   CreateMemberParameter({
     this.name = "",
@@ -29,6 +32,7 @@ class CreateMemberParameter with DioServiceRequest {
     this.secondaryIdentityPhoto,
     this.birthPlace,
     this.birthDate,
+    this.gender,
     this.status,
     this.occupation,
     this.address,
@@ -37,6 +41,7 @@ class CreateMemberParameter with DioServiceRequest {
     this.district,
     this.subDistrict,
     this.postalCode,
+    this.syncType = MemberSyncType.draft,
   });
 
   @override
@@ -67,5 +72,28 @@ class CreateMemberParameter with DioServiceRequest {
       "kelurahan": subDistrict,
       "kode_pos": postalCode,
     });
+  }
+
+  Future<MemberModel> toMember() async {
+    return MemberModel(
+      userId: GlobalFunc.generateRandomId(),
+      fullName: name,
+      nik: nik,
+      phoneNumber: phone,
+      birthPlace: birthPlace,
+      birthDate: birthDate,
+      status: status,
+      occupation: occupation,
+      province: province,
+      city: city,
+      district: district,
+      subDistrict: subDistrict,
+      postalCode: postalCode,
+      address: address,
+      gender: gender,
+      primaryIndentityPhotoPath: primaryIdentityPhoto?.path,
+      secondaryIndentityPhotoPath: secondaryIdentityPhoto?.path,
+      syncType: syncType,
+    );
   }
 }
