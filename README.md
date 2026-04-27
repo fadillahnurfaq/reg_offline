@@ -1,7 +1,7 @@
 # Register Offline
 
 ## Link Aplikasi
-[https://drive.google.com/file/d/191dWj7asCLfHNHutTGVHfcNk7M5oLcPY/view?usp=sharing](https://drive.google.com/file/d/191dWj7asCLfHNHutTGVHfcNk7M5oLcPY/view?usp=sharing)
+[https://drive.google.com/file/d/1ZaHB01mgiE1Vt68AQN76enVU_D6v4ATw/view?usp=sharing](https://drive.google.com/file/d/1ZaHB01mgiE1Vt68AQN76enVU_D6v4ATw/view?usp=sharing)
 
 ## Link Record Aplikasi
 [https://drive.google.com/file/d/1JOy7tiLepl9_31ViBXoFwdnPEzirhzr3/view?usp=sharing](https://drive.google.com/file/d/1JOy7tiLepl9_31ViBXoFwdnPEzirhzr3/view?usp=sharing)
