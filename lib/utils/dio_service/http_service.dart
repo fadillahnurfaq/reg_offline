@@ -59,7 +59,6 @@ class HttpService {
     } on DioException catch (e) {
       return Left(_fromDioError(e));
     } catch (e) {
-      print("Datanya $e");
       return Left(
         ApiException(
           statusCode: null,

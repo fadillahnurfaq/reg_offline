@@ -44,4 +44,14 @@ class MemberLocalService {
       return const Left("Terjadi kesalahan saat menyimpan data, silahkan hubungi system admin.");
     }
   }
+
+  Future<Either<String, void>> removeAll() async {
+    try {
+      final box = await HiveService.getBox<MemberModel>(HiveBoxes.member);
+      await box.clear();
+      return const Right(null);
+    } catch (e) {
+      return const Left("Terjadi kesalahan saat menyimpan data, silahkan hubungi system admin.");
+    }
+  }
 }
