@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ProfileState {
 
- bool get isLoadingLogout; bool get isSuccessLogout;
+ bool get isLoadingLogout; bool get isSuccessLogout; Result<String> get resultAppVersion;
 /// Create a copy of ProfileState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -25,16 +25,16 @@ $ProfileStateCopyWith<ProfileState> get copyWith => _$ProfileStateCopyWithImpl<P
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProfileState&&(identical(other.isLoadingLogout, isLoadingLogout) || other.isLoadingLogout == isLoadingLogout)&&(identical(other.isSuccessLogout, isSuccessLogout) || other.isSuccessLogout == isSuccessLogout));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProfileState&&(identical(other.isLoadingLogout, isLoadingLogout) || other.isLoadingLogout == isLoadingLogout)&&(identical(other.isSuccessLogout, isSuccessLogout) || other.isSuccessLogout == isSuccessLogout)&&(identical(other.resultAppVersion, resultAppVersion) || other.resultAppVersion == resultAppVersion));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,isLoadingLogout,isSuccessLogout);
+int get hashCode => Object.hash(runtimeType,isLoadingLogout,isSuccessLogout,resultAppVersion);
 
 @override
 String toString() {
-  return 'ProfileState(isLoadingLogout: $isLoadingLogout, isSuccessLogout: $isSuccessLogout)';
+  return 'ProfileState(isLoadingLogout: $isLoadingLogout, isSuccessLogout: $isSuccessLogout, resultAppVersion: $resultAppVersion)';
 }
 
 
@@ -45,7 +45,7 @@ abstract mixin class $ProfileStateCopyWith<$Res>  {
   factory $ProfileStateCopyWith(ProfileState value, $Res Function(ProfileState) _then) = _$ProfileStateCopyWithImpl;
 @useResult
 $Res call({
- bool isLoadingLogout, bool isSuccessLogout
+ bool isLoadingLogout, bool isSuccessLogout, Result<String> resultAppVersion
 });
 
 
@@ -62,11 +62,12 @@ class _$ProfileStateCopyWithImpl<$Res>
 
 /// Create a copy of ProfileState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? isLoadingLogout = null,Object? isSuccessLogout = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? isLoadingLogout = null,Object? isSuccessLogout = null,Object? resultAppVersion = null,}) {
   return _then(_self.copyWith(
 isLoadingLogout: null == isLoadingLogout ? _self.isLoadingLogout : isLoadingLogout // ignore: cast_nullable_to_non_nullable
 as bool,isSuccessLogout: null == isSuccessLogout ? _self.isSuccessLogout : isSuccessLogout // ignore: cast_nullable_to_non_nullable
-as bool,
+as bool,resultAppVersion: null == resultAppVersion ? _self.resultAppVersion : resultAppVersion // ignore: cast_nullable_to_non_nullable
+as Result<String>,
   ));
 }
 
@@ -151,10 +152,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool isLoadingLogout,  bool isSuccessLogout)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( bool isLoadingLogout,  bool isSuccessLogout,  Result<String> resultAppVersion)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ProfileState() when $default != null:
-return $default(_that.isLoadingLogout,_that.isSuccessLogout);case _:
+return $default(_that.isLoadingLogout,_that.isSuccessLogout,_that.resultAppVersion);case _:
   return orElse();
 
 }
@@ -172,10 +173,10 @@ return $default(_that.isLoadingLogout,_that.isSuccessLogout);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool isLoadingLogout,  bool isSuccessLogout)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( bool isLoadingLogout,  bool isSuccessLogout,  Result<String> resultAppVersion)  $default,) {final _that = this;
 switch (_that) {
 case _ProfileState():
-return $default(_that.isLoadingLogout,_that.isSuccessLogout);case _:
+return $default(_that.isLoadingLogout,_that.isSuccessLogout,_that.resultAppVersion);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -192,10 +193,10 @@ return $default(_that.isLoadingLogout,_that.isSuccessLogout);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool isLoadingLogout,  bool isSuccessLogout)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( bool isLoadingLogout,  bool isSuccessLogout,  Result<String> resultAppVersion)?  $default,) {final _that = this;
 switch (_that) {
 case _ProfileState() when $default != null:
-return $default(_that.isLoadingLogout,_that.isSuccessLogout);case _:
+return $default(_that.isLoadingLogout,_that.isSuccessLogout,_that.resultAppVersion);case _:
   return null;
 
 }
@@ -207,11 +208,12 @@ return $default(_that.isLoadingLogout,_that.isSuccessLogout);case _:
 
 
 class _ProfileState implements ProfileState {
-  const _ProfileState({this.isLoadingLogout = false, this.isSuccessLogout = false});
+  const _ProfileState({this.isLoadingLogout = false, this.isSuccessLogout = false, this.resultAppVersion = const Result.initial()});
   
 
 @override@JsonKey() final  bool isLoadingLogout;
 @override@JsonKey() final  bool isSuccessLogout;
+@override@JsonKey() final  Result<String> resultAppVersion;
 
 /// Create a copy of ProfileState
 /// with the given fields replaced by the non-null parameter values.
@@ -223,16 +225,16 @@ _$ProfileStateCopyWith<_ProfileState> get copyWith => __$ProfileStateCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProfileState&&(identical(other.isLoadingLogout, isLoadingLogout) || other.isLoadingLogout == isLoadingLogout)&&(identical(other.isSuccessLogout, isSuccessLogout) || other.isSuccessLogout == isSuccessLogout));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProfileState&&(identical(other.isLoadingLogout, isLoadingLogout) || other.isLoadingLogout == isLoadingLogout)&&(identical(other.isSuccessLogout, isSuccessLogout) || other.isSuccessLogout == isSuccessLogout)&&(identical(other.resultAppVersion, resultAppVersion) || other.resultAppVersion == resultAppVersion));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,isLoadingLogout,isSuccessLogout);
+int get hashCode => Object.hash(runtimeType,isLoadingLogout,isSuccessLogout,resultAppVersion);
 
 @override
 String toString() {
-  return 'ProfileState(isLoadingLogout: $isLoadingLogout, isSuccessLogout: $isSuccessLogout)';
+  return 'ProfileState(isLoadingLogout: $isLoadingLogout, isSuccessLogout: $isSuccessLogout, resultAppVersion: $resultAppVersion)';
 }
 
 
@@ -243,7 +245,7 @@ abstract mixin class _$ProfileStateCopyWith<$Res> implements $ProfileStateCopyWi
   factory _$ProfileStateCopyWith(_ProfileState value, $Res Function(_ProfileState) _then) = __$ProfileStateCopyWithImpl;
 @override @useResult
 $Res call({
- bool isLoadingLogout, bool isSuccessLogout
+ bool isLoadingLogout, bool isSuccessLogout, Result<String> resultAppVersion
 });
 
 
@@ -260,11 +262,12 @@ class __$ProfileStateCopyWithImpl<$Res>
 
 /// Create a copy of ProfileState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? isLoadingLogout = null,Object? isSuccessLogout = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? isLoadingLogout = null,Object? isSuccessLogout = null,Object? resultAppVersion = null,}) {
   return _then(_ProfileState(
 isLoadingLogout: null == isLoadingLogout ? _self.isLoadingLogout : isLoadingLogout // ignore: cast_nullable_to_non_nullable
 as bool,isSuccessLogout: null == isSuccessLogout ? _self.isSuccessLogout : isSuccessLogout // ignore: cast_nullable_to_non_nullable
-as bool,
+as bool,resultAppVersion: null == resultAppVersion ? _self.resultAppVersion : resultAppVersion // ignore: cast_nullable_to_non_nullable
+as Result<String>,
   ));
 }
 

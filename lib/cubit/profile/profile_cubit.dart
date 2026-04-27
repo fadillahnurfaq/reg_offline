@@ -2,15 +2,27 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:register_offline/services/member_local_service.dart';
 import 'package:register_offline/utils/secure_storage_manager.dart';
+import '../../models/result.dart';
+import '../../utils/global_func.dart';
 
 part 'profile_state.dart';
 part 'profile_cubit.freezed.dart';
 
 class ProfileCubit extends Cubit<ProfileState> {
   final MemberLocalService memberLocalService;
+  
   ProfileCubit({
     required this.memberLocalService,
-  }) : super(ProfileState.initial());
+  }) : super(ProfileState.initial()) {
+    _getAppVersion();
+  }
+
+
+  Future<void> _getAppVersion() async {
+    emit(state.copyWith(resultAppVersion: const Result.loading()));
+    final version = await GlobalFunc.getBuildVersion();
+    emit(state.copyWith(resultAppVersion: Result.success(version)));
+  }
 
   Future<void> logout() async {
     emit(state.copyWith(isLoadingLogout: true));

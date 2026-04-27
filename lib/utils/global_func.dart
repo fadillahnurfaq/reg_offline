@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 class GlobalFunc {
   GlobalFunc._();
@@ -25,5 +26,10 @@ class GlobalFunc {
 
   static String generateRandomId() {
     return _uuid.v4();
+  }
+
+  static Future<String> getBuildVersion() async {
+    final PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    return "v${packageInfo.version}";
   }
 }

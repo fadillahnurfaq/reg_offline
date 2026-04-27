@@ -149,7 +149,7 @@ class _TabDraftDashboardState extends State<TabDraftDashboard> with AutomaticKee
                 padding: EdgeInsets.only(
                   left: 16.0,
                   right: 16.0,
-                  bottom: context.bottomPadding,
+                  bottom: context.bottomPadding + 16.0,
                   top: 16.0
                 ),
                 decoration: const BoxDecoration(

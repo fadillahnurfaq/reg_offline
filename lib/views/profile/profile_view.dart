@@ -9,6 +9,8 @@ import 'package:register_offline/utils/injector.dart';
 import 'package:register_offline/utils/text_style.dart';
 import 'package:register_offline/views/profile/widgets/logout_modal.dart';
 import 'package:register_offline/views/splash_view.dart';
+import 'package:register_offline/widgets/result_handler.dart';
+import 'package:register_offline/widgets/skeleton_loading_wid.dart';
 
 import '../../utils/dialog_helper.dart';
 import '../../utils/extensions/build_context_extension.dart';
@@ -24,6 +26,7 @@ class ProfileView extends StatelessWidget {
         memberLocalService: locator<MemberLocalService>()
       ),
       child: BlocListener<ProfileCubit, ProfileState>(
+        listenWhen: (previous, current) => previous.isLoadingLogout != current.isLoadingLogout || previous.isSuccessLogout != current.isSuccessLogout,
         listener: (context, state) {
           if (state.isLoadingLogout) {
             context.hideKeyboard();
@@ -39,7 +42,6 @@ class ProfileView extends StatelessWidget {
         child: Scaffold(
           appBar: AppBar(title: Text("Profile", style: headlineSmallBold)),
           body: SafeArea(
-            bottom: false,
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Column(
@@ -154,6 +156,26 @@ class ProfileView extends StatelessWidget {
                       ),
                     ),
                   ),
+                  const Spacer(),
+                  BlocBuilder<ProfileCubit, ProfileState>(
+                    buildWhen: (previous, current) => previous.resultAppVersion != current.resultAppVersion,
+                    builder: (context, state) {
+                      return ResultHandler(
+                        requestState: state.resultAppVersion,
+                        loadingWidget: SkeletonLoadingWid(
+                          width: context.width / 3,
+                          height: 16.0,
+                        ),
+                        successWidget: (result) {
+                          return Text(
+                            result,
+                            style: bodyRegular,
+                          );
+                        },
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 8.0),
                 ],
               ),
             ),
